@@ -7,6 +7,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wikidogs.R
 import com.example.wikidogs.model.DogBreed
+import com.example.wikidogs.util.getProgressDrawable
+import com.example.wikidogs.util.loadImage
 import kotlinx.android.synthetic.main.item_dog.view.*
 
 //ListAdapter provides an interface between model and view
@@ -35,6 +37,8 @@ class DogsListAdapter(val dogsList: ArrayList<DogBreed>): RecyclerView.Adapter<D
         holder.view.setOnClickListener {
             Navigation.findNavController(it).navigate(ListFragmentDirections.actionDetailFragment())
         }
+
+        holder.view.imageView.loadImage(dogsList[position].imageUrl, getProgressDrawable(holder.view.imageView.context))
 
     }
 
