@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="dog"
+            type="com.example.wikidogs.model.DogBreed" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:src="@mipmap/ic_doc_icon"
+            android:imageUrl="@{dog.imageUrl}"
             android:scaleType="fitCenter"
             android:minHeight="200dp"/>
 
@@ -22,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogImage"
-            android:text="Dog Name"
+            android:text="@{dog.dogBreed"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
@@ -31,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogName"
-            android:text="Dog Purpose"
+            android:text="@{dog.bredFor"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
         <TextView
@@ -39,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogPurpose"
-            android:text="Dog Temperament"
+            android:text="@{dog.temperament}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
@@ -48,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogTemperament"
-            android:text="Dog Lifespan"
+            android:text="@{dog.lifeSpan}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
