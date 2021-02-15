@@ -18,7 +18,7 @@ class DetailViewModel(application: Application): BaseViewModel(application) {
             val dog = DogDatabase(getApplication()).dogDao().getDog(uuid)
 
             dogLiveData.value = dog    //assigning to mutable live data we created which holds data
-            //no need of error or loading
+                                        //no need of error or loading
         }
 
 
