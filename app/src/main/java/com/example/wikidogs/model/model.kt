@@ -43,3 +43,5 @@ data class DogBreed(    //default class name
     var uuid: Int = 0
 
 }
+
+data class DogPalette(var color: Int)
