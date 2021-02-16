@@ -1,12 +1,11 @@
 package com.example.wikidogs.view
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wikidogs.R
 import com.example.wikidogs.viewmodel.ListViewModel
@@ -19,9 +18,13 @@ class ListFragment : Fragment() {
     private val dogsListAdapter = DogsListAdapter(arrayListOf())  //adapter takes an empty array and later we pass array
 
     override fun onCreateView(                          //onCreateView is a lifecycle class
+
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        setHasOptionsMenu(true)  // allows system to create menu
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list, container, false)
 
@@ -76,7 +79,21 @@ class ListFragment : Fragment() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {      // for mennu option to bring settings screen
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.list_menu, menu)  //inflate layout and pass it to menu variable
 
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {       //overriding the function used to do operation when menu item is clicked
 
+       when(item.itemId) {
+           R.id.actionSettings -> {
+              view?.let { Navigation.findNavController(it).navigate(ListFragmentDirections.actionSettings()) }
+           }
+       }
+
+        return super.onOptionsItemSelected(item)
+
+    }
 }

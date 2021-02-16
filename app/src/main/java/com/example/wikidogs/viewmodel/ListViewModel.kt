@@ -7,12 +7,14 @@ import androidx.lifecycle.ViewModel
 import com.example.wikidogs.model.DogBreed
 import com.example.wikidogs.model.DogDatabase
 import com.example.wikidogs.model.DogsApiService
+import com.example.wikidogs.util.NotificationsHelper
 import com.example.wikidogs.util.SharedPreferencesHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import java.lang.NumberFormatException
 
 // Viewmodel does not know about the view
 // a strong separation between viewmodel and view which is the the basic criteria for MVVM
@@ -33,6 +35,8 @@ class ListViewModel(application: Application): BaseViewModel(application) {
 
     fun refresh() {     // to decide from where to take info based on time data was fetched from online
 
+        checkCacheDuration()
+
         val updateTime = prefHelper.getUpdateTime()
         if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime) {
             fetchfromDatabase()
@@ -40,6 +44,18 @@ class ListViewModel(application: Application): BaseViewModel(application) {
             fetchFromRemote()
         }
 
+    }
+
+    fun checkCacheDuration() {
+        val cachePreference = prefHelper.getCacheDuration()
+
+        try {
+            val cachePreferenceInt = cachePreference?.toInt() ?: 5 * 60  //for 5 min as default if no int is as output
+            refreshTime = cachePreferenceInt.times(1000 * 1000 * 1000L)        // to multiply given value by 1000 * 1000 * 1000L, we use times fn
+                                                        //this vonversion to get time from in nanosecpnds
+        } catch (e: NumberFormatException) {
+            e.printStackTrace()
+        }
     }
 
     fun refreshBypassCache() {      //forcing data to be fectched from endpoint
@@ -63,9 +79,12 @@ class ListViewModel(application: Application): BaseViewModel(application) {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver<List<DogBreed>>(){
+
                     override fun onSuccess(dogList: List<DogBreed>) {
 
                         storeDogsLocally(dogList)
+                        Toast.makeText(getApplication(), "Dogs retrieved from endpoint", Toast.LENGTH_SHORT).show()
+                        NotificationsHelper(getApplication()).createNotification()
 
                     }
 

@@ -1,5 +1,6 @@
 package com.example.wikidogs.view
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +57,9 @@ class DogsListAdapter(val dogsList: ArrayList<DogBreed>): RecyclerView.Adapter<D
 
     override fun onDogClicked(v: View) {
 
-        val uuid : Int = v.dogId.toString().toInt()
+
+        val uuid = v.dogId.text.toString().toInt()
+     //  val uuid =6
         val action =  ListFragmentDirections.actionDetailFragment()
         action.dogUuid = uuid
         Navigation.findNavController(v).navigate(action)

@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogImage"
-            android:text="@{dog.dogBreed"
+            android:text="@{dog.dogBreed}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogName"
-            android:text="@{dog.bredFor"
+            android:text="@{dog.bredFor}"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"/>
         <TextView

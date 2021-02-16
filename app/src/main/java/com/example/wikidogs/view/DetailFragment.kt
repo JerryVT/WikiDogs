@@ -58,15 +58,17 @@ class DetailFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.dogLiveData.observe(this, Observer { dog ->
-            dogName.text = dog.dogBreed
+           // dogName.text = dog.dogBreed
          /*   dogPurpose.text = dog.bredFor
             dogTemperament.text = dog.temperament
             dogLifespan.text = dog.lifeSpan
             context?.let { dogImage.loadImage(dog.imageUrl, getProgressDrawable(it)) }*/
+        //currentDog = dog
 
-            dataBinding.dog = dog
 
             dog?.let {
+                dataBinding.dog = dog
+
                 it.imageUrl?.let {
                     setupBackgroundColor(it)
                 }
@@ -80,7 +82,7 @@ class DetailFragment : Fragment() {
                 .load(url)
                 .into(object : CustomTarget<Bitmap>() {
                     override fun onLoadCleared(placeholder: Drawable?) {
-                        
+
                     }
 
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:id="@+id/dogId"
-            android:text="@{String.valueOf(dog.uuid)"/>
+            android:text="@{String.valueOf(dog.uuid)}"/>
 
     <ImageView
         android:id="@+id/imageView"

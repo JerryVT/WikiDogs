@@ -10,6 +10,9 @@
         <action
             android:id="@+id/actionDetailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/actionSettings"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -31,4 +34,8 @@
         -->
 
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.wikidogs.view.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
